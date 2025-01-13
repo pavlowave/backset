@@ -17,7 +17,7 @@
 
 ```
 git clone https://github.com/pavlowave/backset.git
-cd
+cd backset
 ```
 
 2. Создание .env файла:
