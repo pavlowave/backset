@@ -1,10 +1,12 @@
 
-<h1 align="center">Django + Docker + PostgreSQL Template</h1>
+<h1 align="center">Тестовое задание Justhost</h1>
 
 <div align="center">
 
+Выполнено в рамках [тестового задания](https://app.affine.pro/workspace/f6dfe706-59c0-41e5-898b-9d6a25d84efe/axys06NdTgU_NMAga6JC9?mode=page)
+
 [![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)](https://www.python.org/)
-[![Django](https://img.shields.io/badge/Django-%23092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
+[![Django DRF](https://img.shields.io/badge/Django-%23092E20?style=for-the-badge&logo=django&logoColor=white)](https://www.djangoproject.com/)
 [![Postgres](https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white)](https://www.postgresql.org/)
 [![Docker](https://img.shields.io/badge/Docker-%230db7ed?style=for-the-badge&logo=docker&logoColor=white)](https://www.docker.com/)
 </div>
@@ -14,8 +16,8 @@
 1. Клонирование репозитория:
 
 ```
-git clone https://github.com/pavlowave/Docker-Django-Postgres
-cd Docker-Django-Postgres
+git clone https://github.com/pavlowave/backset.git
+cd
 ```
 
 2. Создание .env файла:
@@ -39,25 +41,40 @@ docker-compose up --build
 ```
 docker-compose exec web-app python manage.py migrate
 ```
-5. Доступ к приложению Приложение будет доступно по адресу: http://127.0.0.1:8000/
+5. Доступ к приложению Приложение будет доступно по адресу: http://127.0.0.1:8000/api/vps/
 
-## Структура проекта
+## 📋 Основные возможности
 
-* **Dockerfile**: Конфигурация для сборки образа Docker.
-* **docker-compose.yml**: Описание сервисов (Django и PostgreSQL).
-* **requirements.txt**: Список Python-зависимостей.
-* **.env**: Конфиденциальные настройки (игнорируется в Git).
-* **settings.py**: Подключение переменных окружения для конфигурации Django.
+API предоставляет следующие функции:
 
-## Как использовать
+1. **Создание нового виртуального сервера**:
+   - Метод: `POST`
+   - URL: `http://127.0.0.1:8000/api/vps/`
+   - Описание: Создаёт новый VPS с заданными параметрами.
+   
+   Пример запроса тела:
+   ```
+    {
+    "cpu": 4,
+    "ram": 8,
+    "hdd": 100,
+    "status": "started"
+    }
+    ```
+2. **Получение информации о конкретном сервере по его `uid`**:
+   - Метод: `GET`
+   - URL: `http://127.0.0.1:8000/api/vps/<uid>/`
+   - Описание: Возвращает данные о сервере с указанным `uid`.
 
-Этот шаблон подходит для:
+3. **Получение списка серверов с фильтрацией**:
+   - Метод: `GET`
+   - URL: `http://127.0.0.1:8000/api/vps/list/`
+   - Описание: Возвращает список всех серверов. Поддерживается фильтрация по следующим параметрам:
+     - `cpu`: Количество процессорных ядер.
+     - `ram`: Объём оперативной памяти.
+     - `status`: Статус сервера (`started`, `stopped`, `blocked`).
 
-* Создания новых Django проектов.
-* Изучения работы с Docker для Django приложений.
-* Быстрого прототипирования веб-приложений.
-
-## Заметки
-
-* Убедитесь, что Docker и Docker Compose установлены на вашей машине.
-* Этот шаблон использует минимальные настройки для разработки. Для продакшена рекомендуется обновить параметры безопасности и использовать менеджер секретов (например, AWS Secret итд)
+4. **Изменение статуса сервера**:
+   - Метод: `PATCH`
+   - URL: `http://127.0.0.1:8000/api/vps/<uid>/status/`
+   - Описание: Позволяет обновить статус сервера.
