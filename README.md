@@ -24,12 +24,12 @@ cd backset
 Создайте файл .env в корне проекта с таким содержанием:
 
 ```bash
-SECRET_KEY=your-django-secret-key
+SECRET_KEY=your-django-secret-key(ваш ключ)
 DEBUG=True
 DB_HOST=db
-DB_NAME=your-db-name
-DB_USER=your-db-user
-DB_PASSWORD=your-db-password
+DB_NAME=dbname
+DB_USER=dbuser
+DB_PASSWORD=pass
 ```
 
 3. Сборка и запуск контейнеров
