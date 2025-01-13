@@ -16,7 +16,7 @@
 1. Клонирование репозитория:
 
 ```
-git clone https://github.com/pavlowave/backset.git
+git clone https://github.com/pavlowave/backset
 cd backset
 ```
 
